@@ -7,7 +7,7 @@ import {
 import App from "./App";
 import { Home } from "./pages/Home/Home";
 import Catalog from "./pages/Catalog/Catalog";
-
+import Cart from "./pages/Cart/Cart";
 let router = null;
 
 export default router = createBrowserRouter([
@@ -22,5 +22,9 @@ export default router = createBrowserRouter([
     {
         path:"/catalog",
         Component:Catalog    
+    },
+    {
+        path:"/cart",
+        Component:Cart
     }
 ])  

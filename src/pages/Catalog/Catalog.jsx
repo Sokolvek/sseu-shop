@@ -1,9 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import store from "../../store/store";
+import useStore from "../../store/store";
 
 export default function Catalog() {
   const url = import.meta.env.VITE_BASE_URL;
   let [products, setProducts] = useState([]);
+   const { count, increment, decrement, reset, addToCart } = useStore()
   async function fetchProducts() {
     const response = await fetch(`${url}/product`);
     const data = await response.json();
@@ -31,13 +34,14 @@ export default function Catalog() {
               />
             </div>
             <span className="product-title">{product.name}</span>
-            <span className="product-price">{product.price}$</span>
-            <button className="add-to-cart text-white bg-black">
+            <span className="product-price">{product.price}$ {count}</span>
+            <button onClick={() => addToCart(product)} className="add-to-cart text-white bg-black">
               Add to cart
             </button>
           </li>
         ))}
       </ul>
+      <a href={`/cart`}>go to cart</a>
       {/* {products.map((item) =>
     item)} */}
     </section>
