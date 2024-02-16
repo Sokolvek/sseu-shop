@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./header.module.css";
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header className={styles.header + " " + "top-0"}>
       <nav className="p-10">
         <ul className="flex justify-between">
           <li className="text-white">logo</li>

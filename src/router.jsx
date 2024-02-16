@@ -8,6 +8,7 @@ import App from "./App";
 import { Home } from "./pages/Home/Home";
 import Catalog from "./pages/Catalog/Catalog";
 import Cart from "./pages/Cart/Cart";
+import AddProduct from "./pages/AddProduct/AddProduct";
 let router = null;
 
 export default router = createBrowserRouter([
@@ -26,5 +27,9 @@ export default router = createBrowserRouter([
     {
         path:"/cart",
         Component:Cart
+    },
+    {
+        path:"/add-product",
+        Component:AddProduct
     }
 ])  
