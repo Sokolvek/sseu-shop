@@ -9,9 +9,17 @@ import { Home } from "./pages/Home/Home";
 import Catalog from "./pages/Catalog/Catalog";
 import Cart from "./pages/Cart/Cart";
 import AddProduct from "./pages/AddProduct/AddProduct";
+import Login from "./pages/login/Login";
+import Header from "./components/layouts/Header/Header"
 let router = null;
 
 export default router = createBrowserRouter([
+    {
+        Component:Header,
+        children:[
+
+        ]
+    },
     {
         path:"/",
         Component:Home
@@ -31,5 +39,9 @@ export default router = createBrowserRouter([
     {
         path:"/add-product",
         Component:AddProduct
+    },
+    {
+        path:"/login",
+        Component:Login
     }
 ])  
