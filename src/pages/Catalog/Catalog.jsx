@@ -37,6 +37,7 @@ export default function Catalog() {
             <button onClick={() => addToCart(product)} className="add-to-cart text-white bg-black">
               Add to cart
             </button>
+            <Link to={`/product-page/${product.id}`}>к товару</Link>
           </li>
         ))}
       </ul>
