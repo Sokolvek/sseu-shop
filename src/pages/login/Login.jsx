@@ -12,23 +12,27 @@ export default function Login() {
         setPassword(e.target.value)
     }
 
-    const loginRequst = async () =>{
+    const loginRequst = async (e) =>{
+        e.preventDefault()
         const data = new FormData()
         data.append("name", name)
         data.append("password", password)
+        data.append("balance", 0)
 
         console.log(data)
-        const response = await fetch(`${url}/login`, {
+        const response = await fetch(`${url}/user/login`, {
             method: "POST",
-            mode: "cors",
-            body: JSON.stringify(data),
             headers: {
-              "Access-Control-Allow-Origin": "*",
-               'Origin': 'http://localhost:5000', // Замените на ваш домен
-              "Content-Type": "application/json", // Замените на нужный тип контента
-            },
-          });
-        // const answer = await response.json()
+                "Content-Type": "application/json"
+              },
+            body: JSON.stringify({
+                name:"felix1",
+                password:"1234",
+                balance:0
+            }),
+
+          }).then((resp) => resp.json()).then((data) => console.log(data));
+     
     }
 
   return (
@@ -48,7 +52,7 @@ export default function Login() {
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input value={password} onChange={(e) => handlePassword(e)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" />
                   </div>
-                  <button onClick={loginRequst} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                  <button onClick={(e) => loginRequst(e)} className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                   </p>
