@@ -12,6 +12,7 @@ import AddProduct from "./pages/AddProduct/AddProduct";
 import Login from "./pages/login/Login";
 import Header from "./components/layouts/Header/Header"
 import ProductPage from "./pages/product-page/ProductPage";
+import Signup from "./pages/signup/Signup";
 let router = null;
 
 export default router = createBrowserRouter([
@@ -48,5 +49,9 @@ export default router = createBrowserRouter([
     {
         path:"/login",
         Component:Login
+    },
+    {
+        path:"/signup",
+        Component:Signup
     }
 ])  
