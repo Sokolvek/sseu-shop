@@ -15,9 +15,9 @@ export default function Signup() {
     const loginRequst = async (e) =>{
         e.preventDefault()
         const data = new FormData()
-        data.append("name", name)
-        data.append("password", password)
-        data.append("balance", 0)
+        data.append("name", "felix1")
+        data.append("password", "1234")
+        data.append("balance", 4)
 
         console.log(data)
         const response = await fetch(`${url}/user/signup`, {

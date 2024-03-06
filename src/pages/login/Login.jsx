@@ -15,23 +15,28 @@ export default function Login() {
     const loginRequst = async (e) =>{
         e.preventDefault()
         const data = new FormData()
-        data.append("name", name)
-        data.append("password", password)
+        data.append("name", "felix1")
+        data.append("password", 1234)
         data.append("balance", 0)
 
         console.log(data)
         const response = await fetch(`${url}/user/login`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json;charset=UTF-8"
+                "Content-Type": "application/json"
               },
             body: JSON.stringify({
-                name:"felix1",
-                password:"1234",
-                balance:0
-            }),
+                name: "felix1",
+                password: "1234",
+                balance: 0
+              }),
 
-          }).then((resp) => resp.json()).then((data) => console.log(data));
+          }).then((resp) => resp.json())
+          .then((data) => {
+            if(data.loginStatus == "ok"){
+                localStorage.setItem("login", true)
+            }
+          });
      
     }
 

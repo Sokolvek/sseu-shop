@@ -26,11 +26,22 @@ export default function Catalog() {
         {products.map((product,i) => (
           <li key={i} className="flex flex-col p-3 max-w-44">
             <div className="product-image">
+            {product.image != null ?(
+              <img
+                className="w-fit"
+                src={product.image}
+                alt=""
+              />
+            ) :(
               <img
                 className="w-fit"
                 src="../src/assets/imgs/meteor.jpg"
                 alt=""
               />
+
+            )
+              
+            }
             </div>
             <span className="product-title">{product.name}</span>
             {/* <span className="product-price">{product.price}$ {count}</span> */}

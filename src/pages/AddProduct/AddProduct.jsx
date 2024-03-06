@@ -3,11 +3,16 @@ import { useState } from "react";
 
 export default function AddProduct() {
   const url = import.meta.env.VITE_BASE_URL;
+  const [file, setFile] = useState()
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: 0,
   });
+  let fileUrl = "https://upcdn.io/12a1yrc/raw/uploads/2024/03/06/4kmhYvd486-file.png"
+  const handleFile = (e) => {
+    setFile(e)
+  }
   const handleName = (e) => {
     setFormData({
       name: e.target.value,
@@ -15,6 +20,24 @@ export default function AddProduct() {
       price: formData.price,
     });
   };
+
+  const uploadFile = async () =>{
+    
+    let url = "https://api.bytescale.com/v2/accounts/12a1yrc/uploads/binary"
+    const form = new FormData()
+    form.append("file",file)
+    console.log(form.get(file), file)
+    await fetch(url, {
+      method:"POST",
+      headers:{
+        "Authorization":"Bearer public_12a1yrcATtWV8bcNHskHYdRAufq7"
+      },
+      body: file
+    }).then((data) => data.json())
+    .then((res) => fileUrl = res.fileUrl)
+    
+  }
+
   const handleDescription = (e) => {
     setFormData({
       name: formData.name,
@@ -33,25 +56,24 @@ export default function AddProduct() {
   const addProduct = async (e) => {
     e.preventDefault();
     const form = new FormData();
-    form.append("name", formData.name);
-    form.append("description", formData.description);
-    form.append("price", formData.price);
-    const body = {
-      "id":"421412421412",
-      "name":formData.name,
-      // "description":formData.description,
-      // "price":formData.price
-    }
-    console.log(body)
+    form.append("name", "test");
+    form.append("description", "testd")
+    form.append("price", 0)
+    // form.append("file", fileUrl)
+    const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
     const response = await fetch(`${url}/products`, {
       method: "POST",
-      body: JSON.stringify(body),
-      // mode:"cors",
-      headers: {
-        "Content-Type": "application/json"
-      }
-
+      body: JSON.stringify({
+        "name":"test",
+        "description":"desc",
+        "price":0,
+        "image":fileUrl
+      }),
+      headers:headers
     });
+    const res = await response.json()
+    console.log(res)
   };
 
   return (
@@ -103,6 +125,7 @@ export default function AddProduct() {
               required
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-700 text-white"
             ></textarea>
+            <input type="file" onChange={(e) => setFile(e.target.files[0])}/>
           </div>
           <button
             onClick={(e) => addProduct(e)}
